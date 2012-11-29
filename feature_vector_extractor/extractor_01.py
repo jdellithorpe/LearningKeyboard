@@ -79,7 +79,7 @@ for keypress in keylog_file.readlines():
 # process the segment to form a feature vector, and then 
 # write the word number and feature vector to a file
 
-master_frame_list = commands.getoutput("ls " + images_path + capture_date + "_preproc/ | grep pgm").split('\n')
+master_frame_list = commands.getoutput("ls " + images_path + capture_date + "/ | grep pgm").split('\n')
 master_frame_list_index = 0;
 
 for word_instance in word_timeline:
@@ -109,7 +109,10 @@ for word_instance in word_timeline:
     if word_frame_list:
         # use first frame to work out images sizes
         # for creating the sum matrix
-        im = cv.LoadImageM(images_path + capture_date + "_preproc/" + word_frame_list[0])
+        im = cv.LoadImageM(images_path + capture_date + "/" + word_frame_list[0])
+        im = cv.GetSubRect(im, (205, 145, 225, 95))
+        cv.ConvertScale(im,im,-1,255)
+        cv.Threshold(im, im, 165, 0, cv.CV_THRESH_TOZERO)
         im_downsmpl = cv.CreateMat(im.rows/downsmpl_factor, im.cols/downsmpl_factor, cv.CV_8UC3)
         cv.Resize(im, im_downsmpl) 
         
@@ -122,7 +125,10 @@ for word_instance in word_timeline:
 
         if len(word_frame_list) > 1:
             for frame in word_frame_list[1:]:
-                im = cv.LoadImageM(images_path + capture_date + "_preproc/" + frame)
+                im = cv.LoadImageM(images_path + capture_date + "/" + frame)
+                im = cv.GetSubRect(im, (205, 145, 225, 95))
+                cv.ConvertScale(im,im,-1,255)
+                cv.Threshold(im, im, 165, 0, cv.CV_THRESH_TOZERO)
                 im_downsmpl = cv.CreateMat(im.rows/downsmpl_factor, im.cols/downsmpl_factor, cv.CV_8UC3)
                 cv.Resize(im, im_downsmpl)
                 cv.Add(im_downsmpl, sum, sum)
