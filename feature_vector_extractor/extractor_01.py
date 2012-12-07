@@ -166,7 +166,7 @@ for word_instance in word_timeline:
                 cv.Resize(im, im_downsmpl)
                 cv.Add(im_downsmpl, sum, sum)
   
-        #cv.ConvertScale(sum, avg, 1.0/len(word_frame_list))
+        cv.ConvertScale(sum, avg, 1.0/len(word_frame_list))
         cv.ConvertScale(sum, avg, 1.0)
  
 
