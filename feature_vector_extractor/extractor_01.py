@@ -2,6 +2,15 @@ import sys
 import os
 import commands
 import cv
+import time
+
+# constants
+EXTRACTOR_NAME = "01"
+OUTPUT_FILENAME = "dataset.svm"
+
+# make timestamp for this extraction
+localtime = time.localtime()
+timestamp = "%04d%02d%02d_%02d%02d_%02d" % (localtime.tm_year, localtime.tm_mon, localtime.    tm_mday, localtime.tm_hour, localtime.tm_min, localtime.tm_sec)
 
 # get path to images
 images_path = sys.argv[1]
@@ -18,17 +27,41 @@ capture_date = sys.argv[4]
 # get downsampling factor
 downsmpl_factor = int(sys.argv[5])
 
-# generate keylog filename
+# get path to output directory
+output_path = sys.argv[6]
+
+# construct keylog filename
 keylog_filename = capture_date + "_keylog.txt"
 
-# generate dictionary filename
+# construct dictionary filename
 dict_filename = capture_date + "_dict.txt" 
+
+# construct level 1 output_directory name
+output_dirname_level_1 = EXTRACTOR_NAME + "_" + capture_date
+
+# construct level 2 output directory name
+output_dirname_level_2 = timestamp + "_args_" + str(downsmpl_factor)
 
 # open key log file
 keylog_file = open(keylogs_path + keylog_filename, "r")
 
 # open dictionary file
 dict_file = open(dicts_path + dict_filename, "r")
+
+# create level 1 output directory if it doesn't exist
+if not os.path.exists(output_path + output_dirname_level_1):
+  os.makedirs(output_path + output_dirname_level_1)
+
+# create level 2 output directry if it doesn't exist
+if not os.path.exists(output_path + output_dirname_level_1 + "/" + output_dirname_level_2):
+  os.makedirs(output_path + output_dirname_level_1 + "/" + output_dirname_level_2)
+
+# redirect following output to the output file
+sys.stdout = open(output_path + output_dirname_level_1 + "/" + output_dirname_level_2 + "/" + OUTPUT_FILENAME, 'w')
+
+# create images output directry if it doesn't exist
+if not os.path.exists(output_path + output_dirname_level_1 + "/" + output_dirname_level_2 + "/dataset_images"):
+  os.makedirs(output_path + output_dirname_level_1 + "/" + output_dirname_level_2 + "/dataset_images")
 
 # created named window in case we want to display stuff
 cv.NamedWindow('debug', cv.CV_WINDOW_AUTOSIZE)
@@ -143,7 +176,7 @@ for word_instance in word_timeline:
                 print str(i*avg.cols+j+1) + ":" + str(avg[i,j][0]),
 
         print '\n',
-
+        
         filename = "%s_%02d.jpg" % (word, word_timeline.index(word_instance))
-        cv.SaveImage(filename, avg)
+        cv.SaveImage(output_path + output_dirname_level_1 + "/" + output_dirname_level_2 +     "/dataset_images/" + filename, avg)
 
