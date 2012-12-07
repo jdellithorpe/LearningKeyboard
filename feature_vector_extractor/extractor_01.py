@@ -167,8 +167,6 @@ for word_instance in word_timeline:
                 cv.Add(im_downsmpl, sum, sum)
   
         cv.ConvertScale(sum, avg, 1.0/len(word_frame_list))
-        cv.ConvertScale(sum, avg, 1.0)
- 
 
         print word_list.index(word),
         for i in range(avg.rows):
