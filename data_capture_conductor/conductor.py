@@ -1,6 +1,7 @@
 import time
 import subprocess
 import sys
+import os
 
 # get path to images
 images_path = sys.argv[1]
@@ -19,3 +20,7 @@ p_keylog = subprocess.Popen(["python", "../keylogger/keylogger.py"], stdout=key_
 
 p_keylog.wait()
 p_record.terminate()
+
+filelist = [ f for f in os.listdir(images_path + timestamp) if f.endswith(".ppm") or f.endswith(".dump") or f.endswith(".txt") ]
+for f in filelist:
+  os.remove(images_path + timestamp + "/" + f)
