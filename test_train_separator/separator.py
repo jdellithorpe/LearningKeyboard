@@ -8,8 +8,8 @@ test_example_counts = [0]*num_labels
 
 data_file = open(data_filename, "r")
 
-train_file = open(data_filename + "_train.svm", "wb")
-test_file = open(data_filename + "_test.svm", "wb")
+train_file = open(data_filename + ".train", "wb")
+test_file = open(data_filename + ".test", "wb")
 
 data = data_file.readlines()
 
