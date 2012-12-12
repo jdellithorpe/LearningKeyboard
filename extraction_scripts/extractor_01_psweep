@@ -1,0 +1,19 @@
+#!/bin/sh
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 24 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 21 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 18 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 15 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 12 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 9 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 6 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 3 ../../generated_feature_vectors/
+
+python extractor_01.py ../../data_capture/image_data_capture/ ../../data_capture/key_data_capture/ ../../dictionaries/ 20121207_1716_00_nbc_agg 1 ../../generated_feature_vectors/
